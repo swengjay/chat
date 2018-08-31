@@ -22,10 +22,15 @@ socket.on('newMessage', function (message) {
 //     console.log('Got it!', data);
 // });
 
+$('input[name="message"]').keypress(function () {
+    if ($(this).val()) {
+        $("button[name='submit']").removeAttr('disabled');
+    }
+});
+
 $('#message-form').on('submit', function(e) {
     e.preventDefault();
     var messageTextBox = $('[name=message]');
-    
     if(!messageTextBox.val()) {
 
     } else {
@@ -34,6 +39,11 @@ $('#message-form').on('submit', function(e) {
             text: messageTextBox.val()
         }, function () {
             messageTextBox.val('');
+            // this crap is not working
+            $("button[name='submit']").prop('disabled');
         });
     }
 });
+
+
+
